@@ -116,15 +116,15 @@ Your ``DATABASE_ENGINE`` setting needs to be changed to
     }
 
 Add the middleware ``tenant_schemas.middleware.TenantMiddleware`` to the
-top of ``MIDDLEWARE_CLASSES``, so that each request can be set to use
+top of ``MIDDLEWARE``, so that each request can be set to use
 the correct schema.
 
 .. code-block:: python
 
-    MIDDLEWARE_CLASSES = (
+    MIDDLEWARE = [
         'tenant_schemas.middleware.TenantMiddleware',
         #...
-    )
+    ]
 
 Add ``tenant_schemas.routers.TenantSyncRouter`` to your `DATABASE_ROUTERS`
 setting, so that the correct apps can be synced, depending on what's

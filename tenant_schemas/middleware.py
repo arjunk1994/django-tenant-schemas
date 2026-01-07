@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.exceptions import DisallowedHost
 from django.db import connection, connections
 from django.http import Http404
-from django.core.urlresolvers import set_urlconf
+from django.urls import set_urlconf
 
 from tenant_schemas.utils import (
     get_public_schema_name,

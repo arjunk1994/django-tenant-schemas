@@ -1,6 +1,5 @@
 import unittest
 
-import six
 from django.conf import settings
 from django.core.exceptions import DisallowedHost
 from django.http import Http404
@@ -19,7 +18,6 @@ class MissingDefaultTenantMiddleware(DefaultTenantMiddleware):
     DEFAULT_SCHEMA_NAME = "missing"
 
 
-@unittest.skipIf(six.PY2, "Unexpectedly failing only on Python 2.7")
 class RoutesTestCase(BaseTestCase):
     @classmethod
     def setUpClass(cls):

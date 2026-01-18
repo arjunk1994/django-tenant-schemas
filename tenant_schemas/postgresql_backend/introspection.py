@@ -4,7 +4,7 @@ from django.db.backends.base.introspection import (
     BaseDatabaseIntrospection, FieldInfo, TableInfo,
 )
 from django.db.models.indexes import Index
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 fields = FieldInfo._fields
 if 'default' not in fields:

@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.db import connection
 from django.http import Http404
 from tenant_schemas.utils import get_tenant_model, remove_www_and_dev, get_public_schema_name
@@ -26,6 +25,7 @@ class TenantTutorialMiddleware(object):
                 raise Http404
 
         connection.set_tenant(request.tenant)
+        from django.contrib.contenttypes.models import ContentType
         ContentType.objects.clear_cache()
 
         if hasattr(settings, 'PUBLIC_SCHEMA_URLCONF') and request.tenant.schema_name == get_public_schema_name():

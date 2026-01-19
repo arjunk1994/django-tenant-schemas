@@ -3,7 +3,6 @@ import warnings
 import psycopg2
 
 from django.conf import settings
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 import django.db.utils
 
@@ -87,6 +86,7 @@ class DatabaseWrapper(original_backend.DatabaseWrapper):
         # on public, a particular model has id 14, but on the tenants it has
         # the id 15. if 14 is cached instead of 15, the permissions for the
         # wrong model will be fetched.
+        from django.contrib.contenttypes.models import ContentType
         ContentType.objects.clear_cache()
 
     def set_schema_to_public(self):

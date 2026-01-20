@@ -17,6 +17,11 @@ class Command(SyncCommon):
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
         command = MigrateCommand()
+
+        # FIX: Allow overriding duplicate arguments (like --skip-checks)
+        # that appear in both BaseCommand and MigrateCommand in Django 3.2+
+        parser.conflict_handler = 'resolve'
+
         command.add_arguments(parser)
 
     def handle(self, *args, **options):

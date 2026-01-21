@@ -1,4 +1,3 @@
-from django.core.management.commands.migrate import Command as MigrateCommand
 from django.db.migrations.exceptions import MigrationSchemaMissing
 
 from tenant_schemas.management.commands import SyncCommon
@@ -16,20 +15,13 @@ class Command(SyncCommon):
     )
 
     def add_arguments(self, parser):
-        # Add tenant_schemas base arguments
+        # SyncCommon ALREADY adds migrate arguments
         super().add_arguments(parser)
 
-        command = MigrateCommand()
-
-        # 🔥 Django 3.2+ already defines --skip-checks
-        # tenant_schemas tries to add it again → argparse crash
-        # Remove it before re-adding migrate arguments
+        # 🔥 Remove duplicate Django 3.2+ option
         for action in list(parser._actions):
             if "--skip-checks" in action.option_strings:
                 parser._remove_action(action)
-
-        # Add Django migrate arguments safely
-        command.add_arguments(parser)
 
     def handle(self, *args, **options):
         super().handle(*args, **options)

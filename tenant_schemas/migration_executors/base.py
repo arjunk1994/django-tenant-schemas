@@ -32,6 +32,7 @@ def run_migrations(args, options, executor_codename, schema_name, allow_atomic=T
     options.setdefault('verbosity', 1)
     options.setdefault('interactive', False)
     options.setdefault('skip_checks', False)
+    options.setdefault('run_syncdb', False)
 
     MigrateCommand(stdout=stdout, stderr=stderr).execute(*args, **options)
 
